@@ -11,7 +11,6 @@ const ship = (coordinates, len) => {
             validblock = validblock.filter(item => item !== hitTarget)
             timesHit++
             return true
-
         }
         else {
             return false
@@ -27,7 +26,39 @@ const ship = (coordinates, len) => {
         }
     }
 
-    return { isHit, isSunk, len }
+    return { isHit, isSunk, len, coordinates }
 }
 
-export { ship }
+
+//factory for board that contains data of all ship positions 
+const gameboard = () => {
+
+    let board = [0, 0, 0, 0, 0, 0]//to change array size to full size
+
+    const setShip = (ship) => {
+
+        let coord = ship.coordinates
+        coord.forEach(item => {
+            board[item] = 1
+        });
+
+        return board
+    }
+
+    const receiveAtk = (position) => {
+
+        if (board[position] == 1) {
+            return true
+        }
+        else {
+            board[position] = 'X'
+            return false
+        }
+    }
+
+
+    return { setShip, receiveAtk }
+}
+
+
+export { ship, gameboard }
