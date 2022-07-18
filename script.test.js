@@ -1,14 +1,15 @@
 
-import { ship, gameboard } from './script'
-const shipObject = ship([0, 1, 2, 3,], 4)
+import { ship, gameboard, player } from './script'
+const shipObject = ship([0, 1, 2, 3], 4)
 const boardObject = gameboard()
 const timesHit = jest.fn();
-timesHit.mockReturnValueOnce(1).mockReturnValueOnce(2).mockReturnValue(3);
+timesHit.mockReturnValueOnce(1).mockReturnValueOnce(2).mockReturnValue(4);
+const playerOject = player(boardObject)
 
 // jest.spyOn(board, 'getBoard', 'get').mockReturnValue([0, 1, 1, 1, 0, 0])
 // const something = new MyClass().something
 
-describe.skip('ship tests,', () => {
+describe('ship tests,', () => {
     test('if ship not hit', () => {
         expect(shipObject.isHit(42)).toBe(false)
 
@@ -61,14 +62,20 @@ describe('gameboard tests', () => {
         })
 
         test('check is attack hit', () => {
-            expect(boardObject.receiveAtk(2)).toBe(true)
+            expect(boardObject.receiveAtk(2)).toEqual([1, 1, 'O', 1, 0, 0])
         })
 
         test('check is attack miss', () => {
-            expect(boardObject.receiveAtk(5)).toBe(false)
+            expect(boardObject.receiveAtk(5)).toEqual([1, 1, 'O', 1, 0, 'X'])
         })
     })
 
 
+})
 
+describe('player tests', () => {
+
+    test('get valid attaks', () => {
+        expect(playerOject.getValidAtks([1, 'X', 0, 'O'])).toEqual([0, 2])
+    })
 })

@@ -32,7 +32,10 @@ const ship = (coordinates, len) => {
 
 //factory for board that contains data of all ship positions 
 const gameboard = () => {
-
+    // 0 Empty block
+    // 1 Shhip Block
+    //'X' block attacked and hit ship unit
+    //'0' block attadcked and missed ship unit
     let board = [0, 0, 0, 0, 0, 0]//to change array size to full size
 
     const setShip = (ship) => {
@@ -48,17 +51,52 @@ const gameboard = () => {
     const receiveAtk = (position) => {
 
         if (board[position] == 1) {
-            return true
+            board[position] = 'O'
+            return board
         }
         else {
             board[position] = 'X'
-            return false
+            return board
         }
     }
 
+    const getBoard = () => {
+        return board
+    }
 
-    return { setShip, receiveAtk }
+    return { setShip, receiveAtk, getBoard }
 }
 
 
-export { ship, gameboard }
+
+
+const player = (oponentBoard) => {
+
+    const placeAtk = (position) => {
+        oponentBoard.receiveAtk(position)
+
+    }
+    // const board = oponentBoard.getBoard()
+
+    const getValidAtks = (board) => {
+        let validAtks = []
+        board.forEach((elm, index) => {
+            if (elm == 0) {
+                validAtks.push(index)
+            }
+            if (elm == 1) {
+                validAtks.push(index)
+            }
+        })
+        return validAtks
+    }
+
+    const randomAtk = () => {
+        const validAtks = getValidAtks(board)
+        return validAtks[Math.floor(Math.random() * validAtks.length)];
+    }
+
+    return { placeAtk, getValidAtks, randomAtk }
+}
+
+export { ship, gameboard, player }
