@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly
+}
+
+.gameboard-container,
+.gameboard-2 {
+    display: grid;
+    height: 350px;
+    width: 350px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 1px;
+    /* padding: 125px 475px; */
+
+}
+
+
+.box {
+    background-color: aqua;
+    width: 100%;
+    height: 100%;
+    border: solid 1px black;
+}

@@ -79,3 +79,4 @@ describe('player tests', () => {
         expect(playerOject.getValidAtks([1, 'X', 0, 'O'])).toEqual([0, 2])
     })
 })
+
