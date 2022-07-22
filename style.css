@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;700&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -8,7 +10,8 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-evenly
+    justify-content: space-evenly;
+    /* display: none; */
 }
 
 .gameboard-container,
@@ -25,8 +28,37 @@
 
 
 .box {
-    background-color: aqua;
+    background-color: #fafafa;
     width: 100%;
     height: 100%;
     border: solid 1px black;
+}
+
+.box:disabled {
+    background-color: #fafafa;
+}
+
+.main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0ea5e9;
+}
+
+.tittle {
+    background-color: #0ea5e9;
+    color: white;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 190px;
+    font-weight: 700;
+}
+
+.start {
+    padding: 5px 15px;
+    font-family: 'Bebas Neue';
+    font-size: 100px;
+    font-weight: 400;
+    background-color: #22c55e;
 }
