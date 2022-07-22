@@ -46,6 +46,7 @@ const gameboard = () => {
     //'0' block attadcked and missed ship unit
     let board = Array(100).fill(0)
     let ships = []
+    let prevHit = false
     const setShip = (ship) => {
         ships.push(ship)
         renderShipDOM(ship)
@@ -82,7 +83,6 @@ const gameboard = () => {
     }
     const receiveAtk = (position) => {
         position = parseInt(position)
-
         if (board[position] == 1) {
             board[position] = 'O'
             updateBoard(position, 'hit')
@@ -119,27 +119,35 @@ const gameboard = () => {
 
     const updateBoard = (pos, type) => {
         let target = document.getElementById(pos)
-        if (type === 'hit')
+        if (type === 'hit') {
             target.style.backgroundColor = 'green'
-        if (type === 'miss')
+            prevHit = pos
+        }
+        if (type === 'miss') {
             target.style.backgroundColor = 'yellow'
+            prevHit = false
+        }
 
     }
 
-    return { setShip, receiveAtk, getBoard, renderSinkDOM, ships, allSunk, getShips }
+    return { setShip, receiveAtk, getBoard, renderSinkDOM, ships, allSunk, getShips, prevHit }
 }
 
 
 
 
 const player = (oponentBoard) => {
-
+    let prevHit = false
     let board = oponentBoard.getBoard()
     const placeAtk = (position) => {
         board = oponentBoard.receiveAtk(position)
-        // console.log(oponentBoard.ships)
+        if (board[position] == 'O')
+            prevHit = position
+        else {
+            prevHit = false
+        }
     }
-    // const board = oponentBoard.getBoard()
+
 
     const getValidAtks = (board) => {
         let validAtks = []
@@ -153,9 +161,25 @@ const player = (oponentBoard) => {
         })
         return validAtks
     }
+    const smartAtk = (prevHit, validAtks) => {
+        let next = (validAtks.indexOf(prevHit + 1))
+        if (!next) {
+            return smartAtk((prevHit + 2))
+        }
+        return next
+    }
     // random attack for Computer
     const randomAtk = () => {
         const validAtks = getValidAtks(board)
+        //If previous attack was success,next attack will be next to previous attack coordiante
+        if (prevHit) {
+            let next = (validAtks.indexOf(prevHit + 1))
+            if (next == -1) {
+                return validAtks[Math.floor(Math.random() * validAtks.length)]
+            }
+
+            return validAtks[next]
+        }
         return validAtks[Math.floor(Math.random() * validAtks.length)]
     }
 
