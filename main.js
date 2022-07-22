@@ -9,18 +9,18 @@ for (let index = 0; index < 100; index++) {
     const div2 = document.createElement('button')
     div.classList.add('box')
     div.textContent = index
-    div2.classList.add('box')
+    div2.classList.add('box', 'user')
     div.setAttribute('id', index)
     div2.setAttribute('id', (index + 100))
     div2.textContent = index + 100
-    div.disabled = true
     container.appendChild(div)
     container_2.appendChild(div2)
 
 }
 
 const shipslength = [5, 4, 3, 3, 2, 2, 1]
-const boxs = document.querySelectorAll('.box')
+const boxs = document.querySelectorAll('.user')
+// const boxs = container.children
 const boardarr = (Array.from(Array(100).keys()))
 let usedCoord = []
 const getRandom = function () {
@@ -89,6 +89,7 @@ const randomShip = (length) => {
         }
         return out
     }
+
     if (type) {
         coord = linecoord(start, length)
     }
@@ -104,6 +105,7 @@ const randomShip = (length) => {
         }
     })
 
+    //validation for generating valid coordiantes
     if (flag) {
         return randomShip(length)
     }

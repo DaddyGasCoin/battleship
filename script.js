@@ -104,27 +104,27 @@ const gameboard = () => {
     }
     const renderShipDOM = (ship) => {
         let coord = ship.getCoordinates()
-        coord.forEach(pos => {
-            const target = document.getElementById(pos)
-            target.style.backgroundColor = 'red'
-        });
+        // coord.forEach(pos => {
+        //     const target = document.getElementById(pos)
+        //     target.style.backgroundColor = 'red'
+        // });
     }
 
     const renderSinkDOM = (coordinates) => {
         coordinates.forEach(shipUnit => {
             const target = document.getElementById(shipUnit)
-            target.style.backgroundColor = 'black'
+            target.style.backgroundColor = '#57534e'
         });
     }
 
     const updateBoard = (pos, type) => {
         let target = document.getElementById(pos)
         if (type === 'hit') {
-            target.style.backgroundColor = 'green'
+            target.style.backgroundColor = '#ef4444'
             prevHit = pos
         }
         if (type === 'miss') {
-            target.style.backgroundColor = 'yellow'
+            target.style.backgroundColor = '#16a34a'
             prevHit = false
         }
 
