@@ -58,6 +58,15 @@ const gameboard = () => {
 
         return board
     }
+    const newBoard = () => {
+        ships.forEach(ship => {
+            let coord = ship.getCoordinates()
+            coord.forEach(pos => {
+                const target = document.getElementById(pos)
+                target.style.backgroundColor = '#fafafa'
+            });
+        });
+    }
     const allSunk = () => {
         let flag = 0
         for (let index = 0; index < ships.length; index++) {
@@ -102,12 +111,13 @@ const gameboard = () => {
     const getShips = () => {
         return ships
     }
+
     const renderShipDOM = (ship) => {
         let coord = ship.getCoordinates()
-        // coord.forEach(pos => {
-        //     const target = document.getElementById(pos)
-        //     target.style.backgroundColor = 'red'
-        // });
+        coord.forEach(pos => {
+            const target = document.getElementById(pos)
+            target.style.backgroundColor = 'red'
+        });
     }
 
     const renderSinkDOM = (coordinates) => {
@@ -130,7 +140,7 @@ const gameboard = () => {
 
     }
 
-    return { setShip, receiveAtk, getBoard, renderSinkDOM, ships, allSunk, getShips, prevHit }
+    return { setShip, receiveAtk, getBoard, renderSinkDOM, ships, allSunk, getShips, prevHit, newBoard }
 }
 
 
