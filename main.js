@@ -11,8 +11,14 @@ startBtn.addEventListener('click', () => {
 
     startgame()
 })
+const display = document.querySelector('.winner-display')
+const displayWinner = function (winner) {
 
+    const winnername = document.querySelector('.winner-name')
+    winnername.textContent = `${winner} wins`
+    display.style.display = 'block'
 
+}
 const startgame = function () {
     const container = document.querySelector('.gameboard-container')
     const container_2 = document.querySelector('.gameboard-2')
@@ -20,11 +26,9 @@ const startgame = function () {
         const div = document.createElement('button')
         const div2 = document.createElement('button')
         div.classList.add('box')
-        div.textContent = index
         div2.classList.add('box', 'user')
         div.setAttribute('id', index)
         div2.setAttribute('id', (index + 100))
-        div2.textContent = index + 100
         container.appendChild(div)
         container_2.appendChild(div2)
 
@@ -136,8 +140,6 @@ const startgame = function () {
     let CPU = player(UserBoard)
 
     for (let index = 0; index < shipslength.length; index++) {
-        // const y = ship(randomShip(shipslength[index]), shipslength[index])
-        // UserBoard.setShip(y)
         const x = ship(randomShip1(shipslength[index]), shipslength[index])
         CPUBoard.setShip(x)
     }
@@ -162,22 +164,24 @@ const startgame = function () {
             box.disabled = true
             User.placeAtk(position)
             if (UserBoard.isGameOver()) {
-                console.log('USERWIN')
+                displayWinner('CPU')
             }
             CPU.placeAtk(CPU.randomAtk())
             if (CPUBoard.isGameOver()) {
-                console.log('CPU WIN')
+                displayWinner('USER')
             }
         })
     });
 
     const begin = document.querySelector('.begin')
     begin.addEventListener('click', () => {
-        begin.style.display = 'none'
-        random.style.display = 'none'
+        begin.parentElement.style.display = 'none'
+        random.parentElement.style.display = 'none'
         container_2.style.display = 'grid'
         CPUBoard.newBoard()
+
     })
+
 
 }
 
