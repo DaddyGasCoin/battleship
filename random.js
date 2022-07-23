@@ -58,7 +58,7 @@ const randomShip1 = (length) => {
     const linecoord = function (start, length) {
         const out = []
         let val;
-        for (let index = 0; index <= length; index++) {
+        for (let index = 1; index <= length; index++) {
             if (boardarr[start] > 150) {
                 val = boardarr[start] - (index * 10)
             }
