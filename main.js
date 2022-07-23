@@ -161,10 +161,23 @@ const startgame = function () {
             const position = box.id
             box.disabled = true
             User.placeAtk(position)
+            if (UserBoard.isGameOver()) {
+                console.log('USERWIN')
+            }
             CPU.placeAtk(CPU.randomAtk())
-
+            if (CPUBoard.isGameOver()) {
+                console.log('CPU WIN')
+            }
         })
     });
+
+    const begin = document.querySelector('.begin')
+    begin.addEventListener('click', () => {
+        begin.style.display = 'none'
+        random.style.display = 'none'
+        container_2.style.display = 'grid'
+        CPUBoard.newBoard()
+    })
 
 }
 

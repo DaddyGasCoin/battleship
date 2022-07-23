@@ -46,7 +46,8 @@ const gameboard = () => {
     //'0' block attadcked and missed ship unit
     let board = Array(100).fill(0)
     let ships = []
-    let prevHit = false
+    // let prevHit = false
+    let gameover = false
     const setShip = (ship) => {
         ships.push(ship)
         renderShipDOM(ship)
@@ -87,8 +88,11 @@ const gameboard = () => {
 
         });
         if (allSunk() == ships.length) {
-            console.log('GG')
+            gameover = true
         }
+    }
+    const isGameOver = () => {
+        return gameover
     }
     const receiveAtk = (position) => {
         position = parseInt(position)
@@ -116,7 +120,7 @@ const gameboard = () => {
         let coord = ship.getCoordinates()
         coord.forEach(pos => {
             const target = document.getElementById(pos)
-            target.style.backgroundColor = 'red'
+            target.style.backgroundColor = '#bae6fd'
         });
     }
 
@@ -131,16 +135,16 @@ const gameboard = () => {
         let target = document.getElementById(pos)
         if (type === 'hit') {
             target.style.backgroundColor = '#ef4444'
-            prevHit = pos
+            // prevHit = pos
         }
         if (type === 'miss') {
             target.style.backgroundColor = '#16a34a'
-            prevHit = false
+            // prevHit = false
         }
 
     }
 
-    return { setShip, receiveAtk, getBoard, renderSinkDOM, ships, allSunk, getShips, prevHit, newBoard }
+    return { setShip, receiveAtk, getBoard, ships, allSunk, getShips, newBoard, isGameOver }
 }
 
 
