@@ -146,6 +146,7 @@ const startgame = function () {
     random.addEventListener('click', () => {
         UserBoard.newBoard()
         UserBoard = gameboard()
+        CPU = player(UserBoard)
         usedCoord = []
         blockeditems = []
         for (let index = 0; index < shipslength.length; index++) {
